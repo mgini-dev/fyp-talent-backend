@@ -30,7 +30,7 @@ class AuthService
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return [
-                'user' => $user->load('roles.permissions'),
+                'user' => $user->load(['roles.permissions', 'talents']),
                 'token' => $token,
             ];
         });
@@ -51,7 +51,7 @@ class AuthService
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-        $user->load('roles.permissions');
+        $user->load(['roles.permissions', 'talents']);
 
         return [
             'user' => $user,
